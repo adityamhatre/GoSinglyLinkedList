@@ -22,7 +22,7 @@ func (list *LinkedList) add(data int) {
 		list.head = &Node{data: -1, link: &newNode}
 
 	} else {
-		pointer := list.head.link
+		pointer := list.getHead().link
 		for ; pointer.link != nil; {
 			pointer = pointer.link
 		}
@@ -47,7 +47,7 @@ func (list *LinkedList) get(i int) (error, int) {
 		return errors.New("out of bounds"), -1
 	}
 	counter := 0
-	pointer := list.head.link
+	pointer := list.getHead().link
 	for ; pointer != nil; {
 		if counter == i {
 			return nil, pointer.data
@@ -59,7 +59,7 @@ func (list *LinkedList) get(i int) (error, int) {
 }
 
 func (list *LinkedList) search(target int) (error, int) {
-	pointer := list.head.link
+	pointer := list.getHead().link
 	counter := 0
 	for ; pointer != nil; {
 		if pointer.data == target {
@@ -77,7 +77,7 @@ func (list *LinkedList) getAll() []int {
 		return returnArray
 	}
 
-	pointer := list.head.link
+	pointer := list.getHead().link
 	for ; pointer != nil; {
 		returnArray = append(returnArray, pointer.data)
 		pointer = pointer.link
@@ -92,7 +92,7 @@ func (list *LinkedList) removeAtIndex(i int) {
 		return
 	}
 	counter := 0
-	pointer := list.getHeadPointer()
+	pointer := list.getHead()
 	frontPointer := pointer.link
 	for ; frontPointer != nil; {
 		if counter == i {
@@ -107,7 +107,7 @@ func (list *LinkedList) removeAtIndex(i int) {
 	}
 }
 
-func (list *LinkedList) getHeadPointer() *Node {
+func (list *LinkedList) getHead() *Node {
 	return list.head
 }
 
